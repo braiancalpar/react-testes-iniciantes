@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  background-color: #403c3b;
+  background-image: url("/bg.png");
+  background-repeat: no-repeat;
+  background-position: inherit;
+  background-size: auto;
+}
