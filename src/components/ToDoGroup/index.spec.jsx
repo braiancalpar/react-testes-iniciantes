@@ -2,6 +2,8 @@ import { render } from "@testing-library/react";
 import React from "react";
 import ToDoGroup from ".";
 import { TodoContext } from "../TodoProvider/TodoContext";
+import customRender from "../../helpers/customRender";
+
 describe("ToDoGroup", () => {
   test("deveria renderizar a mensagem de carregando quando o isLoading for true", () => {
     const { getByText, queryAllByRole } = render(
@@ -36,10 +38,8 @@ describe("ToDoGroup", () => {
       ],
     },
   ])("deveria renderizar o título da lista o tempo todo", ({ isLoading, items }) => {
-    const { getByText, queryByText, queryAllByRole } = render(
-      <TodoContext.Provider value={{}}>
-        <ToDoGroup isLoading={isLoading} todos={items} heading="Visível o tempo todo" />
-      </TodoContext.Provider>,
+    const { getByText, queryByText, queryAllByRole } = customRender(
+      <ToDoGroup isLoading={isLoading} todos={items} heading="Visível o tempo todo" />,
     );
 
     expect(getByText("Visível o tempo todo")).toBeInTheDocument();
@@ -74,11 +74,7 @@ describe("ToDoGroup", () => {
         createdAt: "2026-07-01T10:00:00.000Z",
       },
     ];
-    const { getByText, queryAllByRole } = render(
-      <TodoContext.Provider value={{}}>
-        <ToDoGroup todos={items} heading="Teste" />
-      </TodoContext.Provider>,
-    );
+    const { getByText, queryAllByRole } = customRender(<ToDoGroup todos={items} heading="Teste" />);
 
     expect(queryAllByRole("listitem")).toHaveLength(2);
 
