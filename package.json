@@ -10,7 +10,10 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:low-cost": "jest --runInBand",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "react": "^19.0.0",
