@@ -2,17 +2,15 @@ import { use } from "react";
 import { IconPencil, IconTrash } from "../icons";
 import { TodoContext } from "../TodoProvider/TodoContext";
 import "./todo-item.style.css";
+import mergeClass from "./mergeClass";
 
 export function ToDoItem({ item }) {
   const { toggleItemCompleted, removeTodo, selectTodoForEdit } = use(TodoContext);
 
-  const styles = ["todo-item"];
-  if (item.completed) {
-    styles.push("completed");
-  }
+  const styles = mergeClass(item.completed);
 
   return (
-    <li className={styles.join(" ")}>
+    <li className={styles}>
       <p className="date">{new Date(item.createdAt).toLocaleDateString("pt-BR")}</p>
       <div className="details">
         <input
