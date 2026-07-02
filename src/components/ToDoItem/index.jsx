@@ -21,7 +21,7 @@ export function ToDoItem({ item }) {
         />
         <p className="description">{item.description}</p>
         <div className="actions">
-          <button className="btn" aria-label="delete" onClick={() => removeTodo(item)}>
+          <button className="btn" aria-label="delete" data-testid="btn-delete" onClick={() => removeTodo(item)}>
             <IconTrash />
           </button>
           <button className="btn" aria-label="edit" onClick={() => selectTodoForEdit(item)}>
