@@ -3,6 +3,7 @@ import React from "react";
 import { ToDoItem } from ".";
 import { TodoContext } from "../TodoProvider/TodoContext";
 import userEvent from "@testing-library/user-event";
+import customRender from "../../helpers/customRender";
 
 describe("ToDoItem", () => {
   test("deveria renderizar o item corretamente", () => {
@@ -11,11 +12,9 @@ describe("ToDoItem", () => {
       createdAt: "2026-07-02T10:00:00.000Z",
       completed: false,
     };
-    const { getByText, getByRole } = render(
-      <TodoContext.Provider value={{}}>
-        <ToDoItem item={item} />
-      </TodoContext.Provider>,
-    );
+    const { getByText, getByRole, debug } = customRender(<ToDoItem item={item} />);
+
+    debug();
 
     expect(getByText("Aprender Jest")).toBeInTheDocument();
     expect(getByText("02/07/2026")).toBeInTheDocument();
@@ -28,11 +27,9 @@ describe("ToDoItem", () => {
       createdAt: "2026-07-02T10:00:00.000Z",
       completed: false,
     };
-    const { getByRole } = render(
-      <TodoContext.Provider value={{ selectTodoForEdit: funcaoSimulandoSelectTodoForEdit }}>
-        <ToDoItem item={item} />
-      </TodoContext.Provider>,
-    );
+    const { getByRole } = customRender(<ToDoItem item={item} />, {
+      selectTodoForEdit: funcaoSimulandoSelectTodoForEdit,
+    });
 
     const button = getByRole("button", {
       name: /edit/i,
@@ -48,11 +45,9 @@ describe("ToDoItem", () => {
       createdAt: "2026-07-02T10:00:00.000Z",
       completed: false,
     };
-    const { getByRole } = render(
-      <TodoContext.Provider value={{ removeTodo: funcaoSimulandoRemoveTodo }}>
-        <ToDoItem item={item} />
-      </TodoContext.Provider>,
-    );
+    const { getByRole } = customRender(<ToDoItem item={item} />, {
+      removeTodo: funcaoSimulandoRemoveTodo,
+    });
 
     const button = getByRole("button", {
       name: /delete/i,
@@ -68,11 +63,9 @@ describe("ToDoItem", () => {
       createdAt: "2026-07-02T10:00:00.000Z",
       completed: false,
     };
-    const { getByTestId } = render(
-      <TodoContext.Provider value={{ removeTodo: funcaoSimulandoRemoveTodo }}>
-        <ToDoItem item={item} />
-      </TodoContext.Provider>,
-    );
+    const { getByTestId } = customRender(<ToDoItem item={item} />, {
+      removeTodo: funcaoSimulandoRemoveTodo,
+    });
 
     const button = getByTestId("btn-delete");
     await userEvent.click(button);

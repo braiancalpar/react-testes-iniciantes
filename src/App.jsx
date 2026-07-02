@@ -12,7 +12,7 @@ import ToDoGroup from "./components/ToDoGroup";
 import { TodoContext } from "./components/TodoProvider/TodoContext";
 
 function App() {
-  const { todos, upsertTodo, openTodoFormModal, closeTodoFormModal, isModalOpen } =
+  const { todos, upsertTodo, openTodoFormModal, closeTodoFormModal, isModalOpen, isLoading } =
     use(TodoContext);
 
   return (
@@ -25,8 +25,16 @@ function App() {
         </Header>
 
         <ChecklistsWrapper>
-          <ToDoGroup heading="Para estudar" todos={todos.filter((t) => !t.completed)} />
-          <ToDoGroup heading="Concluído" todos={todos.filter((t) => t.completed)} />
+          <ToDoGroup
+            heading="Para estudar"
+            isLoading={isLoading}
+            todos={todos.filter((t) => !t.completed)}
+          />
+          <ToDoGroup
+            heading="Concluído"
+            isLoading={isLoading}
+            todos={todos.filter((t) => t.completed)}
+          />
           <Footer>
             <FabButton onClick={openTodoFormModal}>
               <IconPlus />
