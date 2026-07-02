@@ -84,4 +84,20 @@ describe("ToDoGroup", () => {
     const todoItem2 = getByText("Estudar Jest");
     expect(todoItem2).toBeInTheDocument();
   });
+
+  describe("falso-positivo", () => {
+    test("deveria renderizar o estado correto quando a lista estiver vazia", () => {
+      const { getByText, queryAllByRole } = render(
+        <ToDoGroup isLoading={false} todos={[]} heading="Teste" />,
+      );
+
+      expect(getByText("Teste")).toBeInTheDocument();
+
+      // Falso-positivo
+      expect(queryAllByRole("listitem")).toHaveLength(0);
+
+      // Correto
+      // expect(getByText("Nenhum item encontrado")).toBeInTheDocument();
+    });
+  });
 });
