@@ -1,3 +1,5 @@
+import mergeClass from "./mergeClass";
+
 describe("./mergeClass.js", () => {
   test("deveria retornar a classe base do todo-item quando o item não estiver completo", () => {
     // Arrange

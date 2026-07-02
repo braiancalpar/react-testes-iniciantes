@@ -7,7 +7,14 @@ describe("Header", () => {
   });
 
   test("deveria renderizar o componente com a classe correta", () => {
-    const { container } = render(<Header />);
+    const { container, debug } = render(
+      <Header>
+        <span>teste de exemplo</span>
+      </Header>,
+    );
+
+    debug();
+
     expect(container.firstChild).toHaveClass("header");
   });
 });
