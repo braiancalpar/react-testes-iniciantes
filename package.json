@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "concurrently 'npm run start:api' 'npm run dev'",
+    "start": "concurrently \"npm run start:api\" \"npm run dev\"",
     "start:api": "npx json-server db.json --port 3001",
     "dev": "vite",
     "build": "vite build",
@@ -13,7 +13,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:low-cost": "jest --runInBand",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:coverage-all": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx}"
   },
   "dependencies": {
     "react": "^19.0.0",
