@@ -10,6 +10,7 @@ import { Heading } from "./components/Heading";
 import { IconPlus, IconSchool } from "./components/icons";
 import ToDoGroup from "./components/ToDoGroup";
 import { TodoContext } from "./components/TodoProvider/TodoContext";
+import { ToDoCount } from "./components/ToDoCount";
 
 function App() {
   const { todos, upsertTodo, openTodoFormModal, closeTodoFormModal, isModalOpen, isLoading } =
@@ -21,6 +22,7 @@ function App() {
         <Header>
           <Heading>
             <IconSchool /> Plano de estudos
+            <ToDoCount />
           </Heading>
         </Header>
 
