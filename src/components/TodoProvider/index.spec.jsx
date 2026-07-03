@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { act, render, waitFor } from "@testing-library/react";
 import React from "react";
 import { TodoProvider } from ".";
 import { getTodos } from "../../services/TodoService";
@@ -6,9 +6,20 @@ import { getTodos } from "../../services/TodoService";
 jest.mock("../../services/TodoService");
 
 describe("TodoProvider", () => {
-  test("deveria renderizar o provider corretamente buscando os todos ao montar", () => {
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
+  test("deveria renderizar o provider corretamente buscando os todos ao montar", async () => {
     render(<TodoProvider />);
 
-    expect(getTodos).toHaveBeenCalled();
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    await waitFor(() => expect(getTodos).toHaveBeenCalled());
   });
 });
